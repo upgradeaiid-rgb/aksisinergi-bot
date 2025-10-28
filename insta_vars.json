@@ -1,0 +1,34 @@
+{
+  "ACCOUNTS": [
+    {
+      "username": "santo_regowo",
+      "password": "jasuke00"
+    },
+    {
+      "username": "sleepingmaster275",
+      "password": "jasuke00"
+    },
+    {
+      "username": "devanoaditama21",
+      "password": "jasuke00"
+    },
+    {
+      "username": "vino_agy77",
+      "password": "jasuke00"
+    },
+    {
+      "username": "restisukawati",
+      "password": "jasuke00"
+    }
+  ],
+  "PROXY_URL": null,
+  "TARGET_POST_URL": "https://www.instagram.com/p/BaRbTf1lRBfvW7OfBCHHI7vuf7Av-bM0K28rM40/?igsh=c2x2Z2dkYXUwcmY2",
+  "COMMENTS": [
+    "Lah… ketahuan busuk malah main drama playing victim. Mental badut emang 🤡",
+    "Selamatkan pikiran, selamatkan logika → stop baca Kaltengpedia. 🚫🧠",
+    "Fakta nggak bisa dilawan: selingkuh ✅ dugem ✅ LC ✅ tipu event ✅",
+    "Media apa kok kerjaannya ngancam pejabat biar dapat amplop? Pers abal-abal banget.",
+    "Mau jaga akal sehat? Easy → stop baca Kaltengpedia mulai sekarang."
+  ],
+  "MAX_COMMENTS_PER_ACCOUNT": 3
+}
