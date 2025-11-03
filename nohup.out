@@ -1,0 +1,176 @@
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://31.97.108.69:8501
+  External URL: http://31.97.108.69:8501
+
+  Stopping...
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+2025-11-02 20:19:46.453 Port 8501 is already in use
+  Stopping...
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+2025-11-02 20:22:31.200 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:22:31.201 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:22:31.201 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:22:31.202 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:22:31.202 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:22:31.202 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:22:51.854 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:22:51.854 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:22:51.854 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:22:51.854 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:22:51.854 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:22:51.854 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:23:04.712 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:23:04.712 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:23:04.712 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:23:04.713 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:23:04.713 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:23:04.713 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:25:15.582 Session with id b1f0e33e-58e1-419b-9d01-253d0a137588 is already connected! Connecting to a new session.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:26:09.675 Thread 'Thread-4 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.769 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.770 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:09.771 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.366 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.367 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.367 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.367 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.367 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.367 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.367 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.367 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.367 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.367 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.367 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.367 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.367 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.367 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.368 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.368 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:11.368 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.008 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.009 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.009 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:27:22.009 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.281 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.282 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.282 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.282 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.282 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.282 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.282 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.282 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.282 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.282 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.282 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.283 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.284 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.284 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.284 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.284 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.284 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-11-02 20:30:27.284 Thread 'Thread-9 (bot_worker)': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+  Stopping...
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+  Stopping...
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
