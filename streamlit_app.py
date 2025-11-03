@@ -5,8 +5,46 @@ import random
 import queue
 import logging
 import threading
+import json
 from typing import List, Dict
 import streamlit as st
+import streamlit as st
+import hashlib
+import time
+
+
+
+APP_PASSWORD = "aksisinergi123"  # ubah sesuai keinginan
+TOKEN_KEY = "aksisinergi_token"
+
+def generate_token(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def check_login():
+    if TOKEN_KEY in st.session_state:
+        return True
+    if "authenticated" in st.session_state and st.session_state.authenticated:
+        return True
+    return False
+
+def login_page():
+    st.title("🔐 Login Aksi Sinergi Bot")
+    password = st.text_input("Masukkan password", type="password")
+    if st.button("Login"):
+        if password == APP_PASSWORD:
+            st.session_state.authenticated = True
+            st.session_state[TOKEN_KEY] = generate_token(password)
+            st.success("Login berhasil! Silakan refresh halaman.")
+            time.sleep(1)
+            st.rerun()
+        else:
+            st.error("Password salah.")
+
+def require_login():
+    if not check_login():
+        login_page()
+        st.stop()
+
 
 # instagrapi import (graceful fallback)
 try:
@@ -21,10 +59,34 @@ DEFAULT_TARGET = ""
 DEFAULT_COMMENTS = ""
 DEFAULT_MAX_COMMENTS = 1
 LOG_FILENAME = "bot_stealth.log"
+ACCOUNTS_FILE = "accounts.json"
+SESSION_DIR = "sessions"
+os.makedirs(SESSION_DIR, exist_ok=True)
+
+# ====== Helper: persist akun ke file (harus didefinisikan sebelum dipakai) ======
+def load_accounts_from_file():
+    try:
+        with open(ACCOUNTS_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            if isinstance(data, list):
+                return data
+            return []
+    except FileNotFoundError:
+        return []
+    except Exception as e:
+        print(f"Gagal memuat file akun: {e}")
+        return []
+
+def save_accounts_to_file(accounts):
+    try:
+        with open(ACCOUNTS_FILE, "w", encoding="utf-8") as f:
+            json.dump(accounts, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        print(f"Gagal menyimpan file akun: {e}")
 
 # ====== Ensure session_state keys ======
 if "accounts" not in st.session_state:
-    st.session_state.accounts: List[Dict[str, str]] = []
+    st.session_state.accounts: List[Dict[str, str]] = load_accounts_from_file()
 
 if "clients" not in st.session_state:
     st.session_state.clients: Dict[str, object] = {}
@@ -42,55 +104,73 @@ if "log_queue" not in st.session_state:
     st.session_state.log_queue = queue.Queue()
 
 if "stop_event" not in st.session_state:
+    # Event object must live in session_state so UI can set it and thread can read it via config
     st.session_state.stop_event = threading.Event()
 
 # ====== LOGGING ======
-
 logger = logging.getLogger("instagrapi_logger")
 logger.setLevel(logging.DEBUG)
 
-file_handler = logging.FileHandler(LOG_FILENAME, mode='a', encoding='utf-8')
-formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s')
-file_handler.setFormatter(formatter)
-logger.addHandler(file_handler)
+# Avoid duplicate handlers on hot reload
+def _has_handler_of_type(logger_, typ):
+    return any(isinstance(h, typ) for h in logger_.handlers)
 
-# optional: agar log tampil di UI via st.session_state.log_lines
-class StreamStateHandler(logging.Handler):
+if not _has_handler_of_type(logger, logging.FileHandler):
+    file_handler = logging.FileHandler(LOG_FILENAME, mode='a', encoding='utf-8')
+    formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s')
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+# handler yang menaruh pesan ke queue (thread-safe)
+class StreamQueueHandler(logging.Handler):
     def emit(self, record):
-        msg = self.format(record)
         try:
+            msg = self.format(record)
             st.session_state.log_queue.put_nowait(msg)
-        except:
+        except Exception:
+            # jangan meledak kalau queue penuh/dsb
             pass
 
-logger.addHandler(StreamStateHandler())
+if not _has_handler_of_type(logger, StreamQueueHandler):
+    qhandler = StreamQueueHandler()
+    qhandler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(message)s'))
+    logger.addHandler(qhandler)
 
 # ====== Helper functions ======
 def login_client_for_account(username: str, password: str):
     """
-    Try to create and login Client. On TwoFactorRequired/ChallengeRequired raise RuntimeError
-    so UI can handle it instead of blocking/using input().
+    Login otomatis menggunakan file session jika tersedia.
+    Jika session rusak/expired, akan login ulang dan menyimpan session baru.
     """
     if Client is None:
         raise RuntimeError("instagrapi belum terinstall di environment ini.")
-    session_file = f"session_{username}.json"
+
+    session_file = os.path.join(SESSION_DIR, f"session_{username}.json")
+
     cl = Client()
     try:
+        # Coba load settings dulu
         if os.path.exists(session_file):
             try:
                 cl.load_settings(session_file)
                 cl.login(username, password)
-                logger.info(f"[{username}] Session loaded dari {session_file}.")
+                logger.info(f"[{username}] Login via session lama berhasil")
                 return cl
-            except Exception:
+            except Exception as e:
+                logger.warning(f"[{username}] Session lama gagal: {e}. Akan login ulang dan menimpa session.")
                 try:
                     os.remove(session_file)
                 except Exception:
                     pass
-        # normal login
+
+        # login normal dan simpan session
         cl.login(username, password)
+        cl.dump_settings(session_file)
+        logger.info(f"[{username}] Login baru sukses, session disimpan ke {session_file}")
+        return cl
+
     except TwoFactorRequired:
-        logger.error(f"[{username}] TwoFactorRequired - tidak otomatis, perlu verifikasi manual.")
+        logger.error(f"[{username}] TwoFactorRequired - verifikasi manual diperlukan.")
         raise RuntimeError("TwoFactorRequired")
     except ChallengeRequired:
         logger.error(f"[{username}] ChallengeRequired - verifikasi manual diperlukan.")
@@ -98,9 +178,9 @@ def login_client_for_account(username: str, password: str):
     except ClientError as e:
         logger.error(f"[{username}] ClientError: {e}")
         raise RuntimeError(f"Login gagal: {e}")
-    cl.dump_settings(session_file)
-    logger.info(f"[{username}] Login sukses, session disimpan.")
-    return cl
+    except Exception as e:
+        logger.error(f"[{username}] Login error umum: {e}")
+        raise RuntimeError(str(e))
 
 def run_buzzer_for_account(cl, username: str, target_post_url: str, comments: List[str], max_comments: int, counters: Dict[str,int],
                            like_delay_min: float, like_delay_max: float, comment_delay_min: float, comment_delay_max: float):
@@ -136,13 +216,11 @@ def run_buzzer_for_account(cl, username: str, target_post_url: str, comments: Li
 # ====== Background worker (uses snapshot only) ======
 def bot_worker(config):
     logger.info("Worker: dimulai.")
-
     stop_event = config.get("stop_event")
     if stop_event is None:
         logger.error("Worker: stop_event tidak ada di config.")
         return
 
-    stop_event.clear()
     client_dict: Dict[str, object] = config.get("client_dict", {}) or {}
     counters = {u: 0 for u in client_dict.keys()}
 
@@ -152,8 +230,7 @@ def bot_worker(config):
                 logger.info("Worker: snapshot client kosong. Berhenti.")
                 break
 
-            if all(counters.get(u, 0) >= config["max_comments_per_account"]
-                   for u in client_dict.keys()):
+            if all(counters.get(u, 0) >= config["max_comments_per_account"] for u in client_dict.keys()):
                 logger.info("Worker: semua akun mencapai limit komentar. Selesai.")
                 break
 
@@ -184,28 +261,28 @@ def bot_worker(config):
                     logger.error(f"[{username}] Error tak terduga: {e}")
                     continue
 
-                delay = random.uniform(config["between_accounts_delay_min"],
-                                       config["between_accounts_delay_max"])
+                delay = random.uniform(config["between_accounts_delay_min"], config["between_accounts_delay_max"])
                 slept = 0.0
                 while slept < delay and not stop_event.is_set():
-                    time.sleep(1)
-                    slept += 1
+                    time.sleep(min(1.0, delay - slept))
+                    slept += 1.0
 
             total_wait = config["loop_wait_seconds"]
             slept = 0.0
             while slept < total_wait and not stop_event.is_set():
-                time.sleep(1)
-                slept += 1
+                time.sleep(min(1.0, total_wait - slept))
+                slept += 1.0
 
     except Exception as e:
         logger.exception(f"Worker crash: {e}")
     finally:
-        st.session_state.running = False
+        # hanya update UI-state di thread utama; di worker thread kita set event flag
         stop_event.set()
         logger.info("Worker: benar-benar berhenti.")
 
-
 # ====== Streamlit UI ======
+require_login()
+
 st.title("Aksi Sinergi IG Bot Stealth")
 st.caption("Tambah akun, login, jalankan bot di background, stop (soft), dan lihat log.")
 
@@ -263,7 +340,8 @@ for i, acc in enumerate(list(st.session_state.accounts)):
             st.sidebar.error(f"{acc['username']} login gagal: {e}")
     if cols[2].button("Hapus", key=f"del_{i}"):
         st.session_state.accounts.pop(i)
-        st.rerun()
+        save_accounts_to_file(st.session_state.accounts)
+        st.experimental_rerun()
 
 # Main manage accounts
 st.markdown("## Manage Accounts")
@@ -274,6 +352,7 @@ with st.form("add_account_form", clear_on_submit=True):
     if add_submit:
         if new_u and new_p:
             st.session_state.accounts.append({"username": new_u.strip(), "password": new_p.strip()})
+            save_accounts_to_file(st.session_state.accounts)
             st.success(f"Akun {new_u} disimpan (belum login).")
         else:
             st.error("Isi username & password")
@@ -302,12 +381,12 @@ if col_start.button("Start Bot (background)"):
     elif st.session_state.running:
         st.warning("Bot sudah berjalan.")
     else:
+        # snapshot clients and pass stop_event explicitly to worker
         config["client_dict"] = dict(st.session_state.clients)
-        config["stop_event"] = st.session_state.stop_event  # <=== Tambahan penting
+        config["stop_event"] = st.session_state.stop_event
         st.session_state.running = True
         st.session_state.stop_event.clear()
         t = threading.Thread(target=bot_worker, args=(config,), daemon=True)
-
         st.session_state.worker_thread = t
         t.start()
         st.success("Worker started.")
@@ -324,13 +403,12 @@ if col_stop.button("Stop Bot (soft)"):
 st.markdown("---")
 st.markdown("## Live Log")
 log_display = st.empty()
+
 def render_logs():
     # Ambil log baru dari queue thread background
     while not st.session_state.log_queue.empty():
         try:
-            st.session_state.log_lines.append(
-                st.session_state.log_queue.get_nowait()
-            )
+            st.session_state.log_lines.append(st.session_state.log_queue.get_nowait())
         except queue.Empty:
             break
 
