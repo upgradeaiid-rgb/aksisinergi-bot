@@ -9,6 +9,9 @@ from typing import List, Dict
 import streamlit as st
 import hashlib
 
+# ================= AUTH CONFIG =================
+
+APP_USERNAME = "admin"
 APP_PASSWORD = "aksisinergi123"
 TOKEN_KEY = "aksisinergi_token"
 
@@ -16,27 +19,33 @@ def generate_token(password):
 	return hashlib.sha256(password.encode()).hexdigest()
 
 def check_login():
-	return st.session_state.get("authenticated") or (TOKEN_KEY in st.session_state and bool(st.session_state.get(TOKEN_KEY)))
+	return (
+		st.session_state.get("authenticated")
+		or (TOKEN_KEY in st.session_state and bool(st.session_state.get(TOKEN_KEY)))
+	)
 
 def login_page():
 	st.title("🔐 Login Aksi Sinergi Bot")
-	password = st.text_input("Masukkan password", type="password")
+
+	username = st.text_input("Username")
+	password = st.text_input("Password", type="password")
+
 	if st.button("Login"):
-		if password == APP_PASSWORD:
+		if username == APP_USERNAME and password == APP_PASSWORD:
 			st.session_state.authenticated = True
 			st.session_state[TOKEN_KEY] = generate_token(password)
 			st.success("Login berhasil! Silakan refresh halaman.")
 			time.sleep(1)
 			st.rerun()
 		else:
-			st.error("Password salah.")
+			st.error("Username atau password salah.")
 
 def require_login():
 	if not check_login():
 		login_page()
 		st.stop()
 
-# instagrapi import
+# ================= instagrapi import =================
 
 try:
 	from instagrapi import Client
@@ -50,7 +59,7 @@ ACCOUNTS_FILE = "accounts.json"
 SESSION_DIR = "sessions"
 os.makedirs(SESSION_DIR, exist_ok=True)
 
-# ========== Helper simpan akun ==========
+# ================= Helper akun =================
 
 def load_accounts_from_file():
 	try:
@@ -70,7 +79,7 @@ def save_accounts_to_file(accounts):
 	except Exception as e:
 		print(f"Gagal simpan file akun: {e}")
 
-# ========== Streamlit session state init ==========
+# ================= Session state init =================
 
 for key, default in {
 	"accounts": load_accounts_from_file(),
@@ -84,7 +93,7 @@ for key, default in {
 	if key not in st.session_state:
 		st.session_state[key] = default
 
-# ========== Logging ==========
+# ================= Logging =================
 
 logger = logging.getLogger("instagrapi_logger")
 logger.setLevel(logging.DEBUG)
@@ -101,7 +110,6 @@ class StreamQueueHandler(logging.Handler):
 	def emit(self, record):
 		try:
 			msg = self.format(record)
-			# put into session queue if exists
 			if "log_queue" in st.session_state:
 				try:
 					st.session_state.log_queue.put_nowait(msg)
@@ -115,7 +123,7 @@ if not _has_handler_of_type(logger, StreamQueueHandler):
 	qh.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(message)s"))
 	logger.addHandler(qh)
 
-# ========== Login function (support proxy) ==========
+# ================= Login function =================
 
 def login_client_for_account(username: str, password: str, proxy: str = None):
 	if Client is None:
@@ -125,7 +133,6 @@ def login_client_for_account(username: str, password: str, proxy: str = None):
 	cl = Client(proxy=proxy) if proxy else Client()
 
 	try:
-		# try load existing session settings
 		if os.path.exists(session_file):
 			try:
 				cl.load_settings(session_file)
@@ -139,14 +146,12 @@ def login_client_for_account(username: str, password: str, proxy: str = None):
 				except Exception:
 					pass
 
-		# fresh login
 		cl.login(username, password)
 		try:
 			cl.dump_settings(session_file)
 		except Exception:
-			# non-fatal if cannot save session
-			logger.warning(f"[{username}] Gagal menyimpan session ke {session_file}")
-		logger.info(f"[{username}] Login baru sukses, session disimpan ke {session_file} (proxy={proxy})")
+			logger.warning(f"[{username}] Gagal menyimpan session")
+		logger.info(f"[{username}] Login baru sukses (proxy={proxy})")
 		return cl
 
 	except TwoFactorRequired:
@@ -158,24 +163,22 @@ def login_client_for_account(username: str, password: str, proxy: str = None):
 	except Exception as e:
 		raise RuntimeError(str(e))
 
-# ========== Worker ==========
+# ================= Worker =================
 
 def run_buzzer_for_account(cl, username, target_post_url, comments, max_comments, counters,
 						   like_min, like_max, comment_min, comment_max):
 	try:
 		pk = cl.media_pk_from_url(target_post_url)
-		_ = cl.media_info(pk)
+		cl.media_info(pk)
 	except Exception as e:
 		logger.error(f"[{username}] Gagal ambil media: {e}")
 		return
 
 	try:
-		# like
 		cl.media_like(pk)
 		logger.info(f"[{username}] Like sukses.")
 		time.sleep(random.uniform(like_min, like_max))
 
-		# comment if not exceeded
 		if counters.get(username, 0) < max_comments:
 			komentar = random.choice(comments) if comments else "Nice!"
 			cl.media_comment(pk, komentar)
@@ -192,8 +195,6 @@ def bot_worker(config):
 	logger.info("Worker mulai.")
 	try:
 		while not stop_event.is_set():
-			if not client_dict:
-				break
 			for username, cl in list(client_dict.items()):
 				if stop_event.is_set():
 					break
@@ -205,22 +206,24 @@ def bot_worker(config):
 					config["like_delay_min"], config["like_delay_max"],
 					config["comment_delay_min"], config["comment_delay_max"]
 				)
-				# delay between accounts but allow early stop
-				delay = random.uniform(config["between_accounts_delay_min"], config["between_accounts_delay_max"])
-				slept = 0.0
-				while slept < delay and not stop_event.is_set():
-					time.sleep(0.5)
-					slept += 0.5
-
-			# loop wait at end of round, allow early stop
-			total_wait = config["loop_wait_seconds"]
-			waited = 0.0
-			while waited < total_wait and not stop_event.is_set():
-				time.sleep(0.5)
-				waited += 0.5
+				delay = random.uniform(
+					config["between_accounts_delay_min"],
+					config["between_accounts_delay_max"]
+				)
+				time.sleep(delay)
+			time.sleep(config["loop_wait_seconds"])
 	finally:
 		stop_event.set()
 		logger.info("Worker berhenti.")
+
+# ================= UI =================
+
+require_login()
+st.title("Aksi Sinergi IG Bot Stealth")
+st.caption("Support proxy per akun untuk IP berbeda.")
+
+# (SELURUH UI DI BAWAH INI TIDAK DIUBAH)
+
 
 # ========== UI ==========
 
@@ -351,3 +354,4 @@ if st.button("Refresh Log"):
 		st.session_state.log_lines.append(st.session_state.log_queue.get_nowait())
 	log_display.text("\n".join(st.session_state.log_lines[-300:]))
 st.markdown("Stop Bot (soft) akan menghentikan worker secara aman tanpa kehilangan sesi.")
+
