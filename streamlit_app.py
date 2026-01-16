@@ -224,7 +224,6 @@ st.caption("Support proxy per akun untuk IP berbeda.")
 
 # (SELURUH UI DI BAWAH INI TIDAK DIUBAH)
 
-
 # ========== UI ==========
 
 require_login()
@@ -354,4 +353,3 @@ if st.button("Refresh Log"):
 		st.session_state.log_lines.append(st.session_state.log_queue.get_nowait())
 	log_display.text("\n".join(st.session_state.log_lines[-300:]))
 st.markdown("Stop Bot (soft) akan menghentikan worker secara aman tanpa kehilangan sesi.")
-
